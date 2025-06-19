@@ -4,7 +4,7 @@ from pydantic import BaseModel
 from datetime import datetime
 
 class Log(Base):
-    __tablename__ = "users"
+    __tablename__ = "logs"
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(String, index=True)
     scale_name = Column(String, index=True)

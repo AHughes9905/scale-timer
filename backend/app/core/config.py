@@ -1,0 +1,14 @@
+import os
+from dotenv import load_dotenv
+from pydantic_settings import BaseSettings
+
+load_dotenv()  # Load environment variables from a .env file
+
+class Settings(BaseSettings):
+    PROJECT_NAME: str = "FastAPI Auth Example"
+    SECRET_KEY: str = os.getenv("SECRET_KEY", "supersecretkey")
+    ALGORITHM: str = "HS256"
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 120
+    DATABASE_URL: str = os.getenv("DATABASE_URL", "postgresql+asyncpg://postgres:admin@localhost/scale-timer")
+
+settings = Settings()
