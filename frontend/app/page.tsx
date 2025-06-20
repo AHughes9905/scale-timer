@@ -4,15 +4,52 @@ import { useState } from "react";
 export default function Home() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [banner, setBanner] = useState<{ type: "error" | "success"; message: string } | null>(null);
+
+  const showBanner = (type: "error" | "success", message: string) => {
+    setBanner({ type, message });
+    setTimeout(() => setBanner(null), 3000);
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle login logic here
-    alert(`Username: ${username}\nPassword: ${password}`);
+    fetch("http://localhost:8000/auth/login", {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username : username,
+        password : password,
+      }),
+    })
+      .then(res => {
+        if (res.ok) {
+          window.location.href = "/dashboard";
+        } else {
+          showBanner("error", "Login failed. Please check your credentials.");
+        }
+      })
+      .catch(err => {
+        console.error("Login error:", err);
+        showBanner("error", "An error occurred while logging in.");
+      });
   };
 
   return (
     <div className="max-w-sm mx-auto mt-8 p-6 bg-white rounded shadow">
+      {banner && (
+        <div
+          className={`mb-4 px-4 py-2 rounded text-sm text-center ${
+            banner.type === "error"
+              ? "bg-red-100 text-red-700 border border-red-300"
+              : "bg-green-100 text-green-700 border border-green-300"
+          }`}
+        >
+          {banner.message}
+        </div>
+      )}
       <h1 className="text-2xl font-semibold mb-6 text-center">Login</h1>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">

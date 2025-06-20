@@ -9,9 +9,15 @@ from db.database import get_db
 
 router = APIRouter()
 
-@router.get("/auth/login", response_model=Token)
-async def login(response: Response, username: str = Form(...), password: str = Form(...), db: AsyncSession = Depends(get_db)):
-    # replace with actual DB lookup
+@router.post("/auth/login", response_model=Token)
+async def login(
+    response: Response, 
+    username: str = Form(...), 
+    password: str = Form(...), 
+    db: AsyncSession = Depends(get_db)
+    ):
+    print(f"Attempting to log in user: {username}")
+    print(f"Password provided: {password}")
     user = await authenticate_user(db=db, username=username, password=password)
     if not user:
         raise HTTPException(status_code=400, detail="Invalid credentials")
