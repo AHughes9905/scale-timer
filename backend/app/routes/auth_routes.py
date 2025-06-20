@@ -9,10 +9,10 @@ from db.database import get_db
 
 router = APIRouter()
 
-@router.post("/auth/token", response_model=Token)
-async def login(response: Response, username: str = Form(...), password: str = Form(...)):
+@router.get("/auth/login", response_model=Token)
+async def login(response: Response, username: str = Form(...), password: str = Form(...), db: AsyncSession = Depends(get_db)):
     # replace with actual DB lookup
-    user = authenticate_user(username, password)
+    user = await authenticate_user(db=db, username=username, password=password)
     if not user:
         raise HTTPException(status_code=400, detail="Invalid credentials")
     token = create_access_token({"sub": user.username}, settings.SECRET_KEY, settings.ALGORITHM)
