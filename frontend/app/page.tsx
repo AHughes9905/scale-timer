@@ -13,16 +13,14 @@ export default function Home() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const formData = new FormData();
+    formData.append("username", username);
+    formData.append("password", password);
+
     fetch("http://localhost:8000/auth/login", {
       method: "POST",
       credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username : username,
-        password : password,
-      }),
+      body: formData,
     })
       .then(res => {
         if (res.ok) {
