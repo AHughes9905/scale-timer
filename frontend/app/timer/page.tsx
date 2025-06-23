@@ -107,8 +107,6 @@ export default function TimerPage() {
       setIsCompleted(false)
       setTime(0)
       setCurrentNoteIndex(0)
-      // Here you would save the time to your database
-      console.log(`Completed ${selectedScale} in ${formatTime(time)}`)
     }
   }
 
