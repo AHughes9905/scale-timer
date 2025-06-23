@@ -17,7 +17,7 @@ export default function Home() {
     formData.append("username", username);
     formData.append("password", password);
 
-    fetch("http://localhost:8000/auth/login", {
+    fetch("http://localhost:8000/api/auth/login", {
       method: "POST",
       credentials: "include",
       body: formData,

@@ -9,7 +9,7 @@ from db.database import get_db
 
 router = APIRouter()
 
-@router.post("/auth/login", response_model=Token)
+@router.post("/login", response_model=Token)
 async def login(
     response: Response, 
     username: str = Form(...), 
@@ -32,7 +32,7 @@ async def login(
     )
     return {"access_token": token, "token_type": "bearer"}
 
-@router.post("/auth/register")
+@router.post("/register")
 async def register_user(
     db: AsyncSession = Depends(get_db),
     username: str = Form(...),

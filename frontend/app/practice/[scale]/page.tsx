@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from "react"
 import { useParams } from "next/navigation"
 import Image from 'next/image';
+import TimeLog from "@/types/time_log"
 
 const scales = [
     "Ionian",
@@ -103,15 +104,6 @@ export default function PracticePage() {
     setIsCompleted(false)
   }
 
-  const handleStop = () => {
-    setIsRunning(false)
-    if (time > 0) {
-      setIsCompleted(false)
-      setTime(0)
-      setCurrentNoteIndex(0)
-    }
-  }
-
   const handleNextNote = () => {
     if (currentNoteIndex < notePermutations.length - 1) {
       setCurrentNoteIndex(currentNoteIndex + 1)
@@ -125,18 +117,53 @@ export default function PracticePage() {
     setTime(0)
     setIsRunning(false)
     setIsCompleted(false)
+    setCurrentNoteIndex(0)
+  }
+
+  const handleSave = () => {
+
+    const timeString = formatTime(time)
+    fetch("http://localhost:8000/api/time/create/", {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        user_id: 1, // Replace with actual user ID
+        scale_name: scale,
+        duration: time,
+      } as TimeLog),
+    })
+      .then((response) => {
+        if (response.ok) {
+          alert(`Time saved successfully! Duration: ${timeString}`)
+        } else {
+          alert("Failed to save time.")
+        }
+      })
+      .catch((error) => {
+        console.error("Error saving time:", error)
+        alert("An error occurred while saving the time.")
+      }
+    )
+
+    setTime(0)
+    setIsRunning(false)
+    setIsCompleted(false)
+    setCurrentNoteIndex(0)
   }
 
   return (
     <div className="flex flex-row items-center justify-center min-h-screen p-8 bg-gray-100">
       <div className="flex flex-col items-center">
         <span className="text-8xl font-mono">
-          {(scale as string).substring(0, 1).toUpperCase() + (scale as string).slice(1)}
+          {(scale as string).charAt(0).toUpperCase() + (scale as string).slice(1)}
         </span>
         <Image
           src={`/images/${scale}.png`}
           alt={`${scale} scale diagram`}
-          width={400}
+          width={'400'}
           height={200}
         />
         <h1 className="text-3xl font-bold mb-6">Timer</h1>
@@ -162,7 +189,7 @@ export default function PracticePage() {
                   <button onClick={handleNextNote} className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
                   Next Note
                   </button>
-                  <button onClick={handleStop} className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
+                  <button onClick={handleReset} className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
                   Stop
                   </button>
               </div>
@@ -170,9 +197,12 @@ export default function PracticePage() {
           )}
           {isCompleted && (
             <>
-              <span className="text-green-600">Completed!</span>
-              <button onClick={handleReset} className="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">
-                Reset
+              <span className="text-4xl">Would you like to save your time?</span>
+              <button onClick={handleSave} className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">
+                Save
+              </button>
+              <button onClick={handleReset} className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
+                Delete
               </button>
             </>
           )}
