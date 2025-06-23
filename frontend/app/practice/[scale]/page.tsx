@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react"
 import { useParams } from "next/navigation"
+import Image from 'next/image';
 
 const scales = [
     "Ionian",
@@ -132,6 +133,12 @@ export default function PracticePage() {
         <span className="text-8xl font-mono">
           {(scale as string).substring(0, 1).toUpperCase() + (scale as string).slice(1)}
         </span>
+        <Image
+          src={`/images/${scale}.png`}
+          alt={`${scale} scale diagram`}
+          width={400}
+          height={200}
+        />
         <h1 className="text-3xl font-bold mb-6">Timer</h1>
         <div className="text-4xl font-mono mb-6">{formatTime(time)}</div>
         <div className="flex gap-4 justify-center">
