@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useEffect, useRef } from "react"
+import { useParams } from "next/navigation"
 
 const scales = [
     "Ionian",
@@ -27,8 +28,7 @@ const notes = [
     "B",
 ]
 
-export default function TimerPage() {
-  const [selectedScale, setSelectedScale] = useState("")
+export default function PracticePage() {
   const [time, setTime] = useState(0)
   const [isRunning, setIsRunning] = useState(false)
   const [isCompleted, setIsCompleted] = useState(false)
@@ -37,6 +37,7 @@ export default function TimerPage() {
   const [bpm, setBpm] = useState(60)
   const [isMetronomeOn, setIsMetronomeOn] = useState(false)
   const audioCtxRef = useRef<AudioContext | null>(null)
+  const { scale } = useParams<{ scale: string }>()
 
   useEffect(() => {
     let interval: NodeJS.Timeout
@@ -94,7 +95,7 @@ export default function TimerPage() {
   }
 
   const handleStart = () => {
-    if (!selectedScale) return
+    if (!scale) return
     setNotePermutations(generateNotePermutations(notes))
     setCurrentNoteIndex(0)
     setIsRunning(true)
@@ -116,7 +117,6 @@ export default function TimerPage() {
     } else {
       setIsRunning(false)
       setIsCompleted(true)
-      console.log(`Completed ${selectedScale} in ${formatTime(time)}`)
     }
   }
 
@@ -129,28 +129,14 @@ export default function TimerPage() {
   return (
     <div className="flex flex-row items-center justify-center min-h-screen p-8 bg-gray-100">
       <div className="flex flex-col items-center">
+        <span className="text-8xl font-mono">
+          {(scale as string).substring(0, 1).toUpperCase() + (scale as string).slice(1)}
+        </span>
         <h1 className="text-3xl font-bold mb-6">Timer</h1>
         <div className="text-4xl font-mono mb-6">{formatTime(time)}</div>
         <div className="flex gap-4 justify-center">
           {!isRunning && !isCompleted && (
             <div className="flex flex-col items-center gap-4">
-              <div className="flex flex-col items-center">
-                <label className="block mb-2 text-lg font-medium">
-                  Select Scale:
-                </label>
-                <select
-                  value={selectedScale}
-                  onChange={(e) => setSelectedScale(e.target.value)}
-                  className="p-2 border rounded"
-                >
-                  <option value="">-- Select Scale --</option>
-                  {scales.map((scale) => (
-                    <option key={scale} value={scale}>
-                      {scale}
-                    </option>
-                  ))}
-                </select>
-              </div>
               <button
                 onClick={handleStart}
                 className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
@@ -161,9 +147,7 @@ export default function TimerPage() {
           )}
           {isRunning && (
             <div className="flex flex-col items-center gap-4">
-              <span className="text-4xl font-mono">
-                  {selectedScale}
-              </span>
+              
               <span className="text-6xl font-mono">
                   {notePermutations[currentNoteIndex]}
               </span>

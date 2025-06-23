@@ -5,7 +5,7 @@ interface ScalePreviewProps {
   buttonAction: (scale: string) => void
 }
 
-function ScalePreview({buttonAction, buttonLabel, scale}: ScalePreviewProps) {
+export default function ScalePreview({buttonAction, buttonLabel, scale}: ScalePreviewProps) {
   return (
     <div className="scale-preview">
       <h2 className="text-lg font-semibold mb-2">{scale}</h2>
