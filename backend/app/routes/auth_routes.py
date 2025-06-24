@@ -44,3 +44,8 @@ async def register_user(
         raise HTTPException(status_code=400, detail="User creation failed")
     
     return {"username": username, "email": email}
+
+@router.post("/logout")
+async def logout(response: Response):
+    response.delete_cookie("access_token")
+    return {"message": "Logged out successfully"}

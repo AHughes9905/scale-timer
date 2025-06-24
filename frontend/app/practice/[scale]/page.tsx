@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react"
 import { useParams } from "next/navigation"
 import Image from 'next/image';
 import TimeLog from "@/types/time_log"
+import NavBar from "@/components/NavBar"
 
 const scales = [
     "Ionian",
@@ -155,7 +156,9 @@ export default function PracticePage() {
   }
 
   return (
-    <div className="flex flex-row items-center justify-center min-h-screen p-8 bg-gray-100">
+    <div className = "p8 sm:p-10">
+      <NavBar />
+    <div className="flex flex-row items-center justify-center p-8 bg-gray-100">
       <div className="flex flex-col items-center">
         <span className="text-8xl font-mono">
           {(scale as string).charAt(0).toUpperCase() + (scale as string).slice(1)}
@@ -229,6 +232,7 @@ export default function PracticePage() {
           {isMetronomeOn ? 'Stop' : 'Start'}
         </button>
       </div>
+    </div>
     </div>
   )
 }

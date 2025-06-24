@@ -1,6 +1,7 @@
 'use client'
 
 import ScalePreview from "@/components/ScalePreview"
+import NavBar from "@/components/NavBar"
 
 const majorScales = [
   "Ionian",
@@ -15,6 +16,7 @@ const majorScales = [
 export default function ScaleSelectorPage() {
   return (
     <div className = "p8 sm:p-20">
+      <NavBar />
       <h1 className="text-3xl font-bold text-center mt-20">
         Select a Scale to Practice
       </h1>
@@ -22,11 +24,14 @@ export default function ScaleSelectorPage() {
         <p className="text-lg">
           Major Scale Modes
         </p>
-        <div className="flex gap-4 items-center mt-10">
+        <p className="text-gray-600 text-md">
+          Practice a major scale mode with all 12 possible root notes.
+          </p>
+        <div className="flex flex-wrap gap-4 items-center mt-10">
           {majorScales.map((scale) => (
             <div
               key={scale}
-              className="bg-gray-100 p-4 rounded-lg shadow border border-gray-200"
+              className="inline-flex flex-col bg-gray-100 p-4 rounded-lg shadow border border-gray-200"
             >
               <ScalePreview
                 scale={scale}

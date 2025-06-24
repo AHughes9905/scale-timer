@@ -2,6 +2,7 @@ from sqlalchemy.future import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from models.user import User
 from models.timing_log import Log
+from schemas.time_log_schema import TimeLogSchema
 
 async def create_timing_log(db: AsyncSession, user_id: int, scale_name: str, duration: int) -> Log:
     log = Log(user_id=user_id, scale_name=scale_name, duration=duration)
@@ -17,8 +18,8 @@ async def get_user_timings_by_scale(db: AsyncSession, user_id: int, scale_name: 
             Log.scale_name == scale_name
         )
     )
-    return result.scalars().all()
+    return [TimeLogSchema.from_orm(Log) for Log in result.scalars().all()]
 
 async def get_user_timings(db: AsyncSession, user_id: int) -> list[Log]:
     result = await db.execute(select(Log).where(User.id == user_id))
-    return result.scalars().all()
+    return [TimeLogSchema.from_orm(Log) for Log in result.scalars().all()]

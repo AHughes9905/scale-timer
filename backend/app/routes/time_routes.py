@@ -23,13 +23,12 @@ async def get_user_times_by_scale(
     else:
         return {"message": "No timing logs found for this user and scale."}
     
-@router.get("/{user_id}")
+@router.get("/")
 async def get_user_times(
-    user_id: int,
     db: AsyncSession = Depends(get_db),
     current_user: User = Depends(dependencies.get_current_user)
 ):
-    result = await time_service.get_user_timings(db, user_id)
+    result = await time_service.get_user_timings(db, current_user.id)
     if result:
         return result
     else:
