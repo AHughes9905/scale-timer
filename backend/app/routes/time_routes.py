@@ -4,7 +4,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from db.database import get_db
 from service import time_service
 from auth import dependencies
-from schemas.time_log_schema import TimeLogSchema
+from schemas.time_log_schema import TimeLogSchema, TimeLogCreateSchema
 from models.user import User
 
 router = APIRouter()
@@ -36,7 +36,7 @@ async def get_user_times(
     
 @router.post("/create")
 async def create_timing_log(
-    timing_log: TimeLogSchema,
+    timing_log: TimeLogCreateSchema,
     db: AsyncSession = Depends(get_db),
     current_user: User = Depends(dependencies.get_current_user)
 ):
