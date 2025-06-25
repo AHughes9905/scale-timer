@@ -3,7 +3,7 @@ from auth.auth import create_access_token
 from schemas.user_schema import Token
 from core.config import settings
 from service.auth_service import authenticate_user
-from service.user_service import create_user
+from service.auth_service import create_user
 from sqlalchemy.ext.asyncio import AsyncSession
 from db.database import get_db
 
@@ -36,9 +36,9 @@ async def login(
 async def register_user(
     db: AsyncSession = Depends(get_db),
     username: str = Form(...),
-    email: str = Form(...),
     password: str = Form(...)
 ):
+    email = username + "@example.com"
     user = await create_user(db=db, username=username, email=email, password=password)
     if not user:
         raise HTTPException(status_code=400, detail="User creation failed")

@@ -21,5 +21,6 @@ async def get_user_timings_by_scale(db: AsyncSession, user_id: int, scale_name: 
     return [TimeLogSchema.from_orm(Log) for Log in result.scalars().all()]
 
 async def get_user_timings(db: AsyncSession, user_id: int) -> list[Log]:
-    result = await db.execute(select(Log).where(User.id == user_id))
+    print(f"Fetching timings for user_id: {user_id}")
+    result = await db.execute(select(Log).where(Log.user_id == user_id))
     return [TimeLogSchema.from_orm(Log) for Log in result.scalars().all()]

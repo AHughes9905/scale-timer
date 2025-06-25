@@ -16,7 +16,10 @@ export default function AnalyticsPage() {
         if (!response.ok) {
           throw new Error("Failed to fetch logs");
         }
-        const data: TimeLog[] = await response.json();
+        let data = await response.json();
+        if (!Array.isArray(data)) {
+          data = [];
+        }
         setLogs(data);
       })
       .catch((error) => {
