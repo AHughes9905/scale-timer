@@ -5,6 +5,6 @@ import Navbar from "@/components/NavBar"
 
 export default function NavBarWrapper() {
   const pathname = usePathname()
-  if (pathname.startsWith('/login')) return null
+  if (pathname.startsWith('/login') || pathname.startsWith('/register')) return null
   return <Navbar />
 }

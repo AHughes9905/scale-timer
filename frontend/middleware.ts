@@ -2,11 +2,22 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 export function middleware(req: NextRequest) {
-  // const token = req.cookies.get('access_token');
+  const { pathname } = req.nextUrl;
+  
+  if (
+    pathname.startsWith('/_next') ||
+    pathname.startsWith('/static') ||
+    pathname.startsWith('/favicon.ico') ||
+    pathname.match(/\.(css|js|png|jpg|jpeg|svg|ico)$/)
+  ) {
+    return NextResponse.next();
+  }
 
-  // if (!token && req.nextUrl.pathname !== '/') {
-  //   return NextResponse.redirect(new URL('/', req.url));
-  // }
+  const token = req.cookies.get('access_token');
 
-  // return NextResponse.next();
+  if (!token && pathname !== '/login' && pathname !== '/register') {
+    return NextResponse.redirect(new URL('/login', req.url));
+  }
+
+  return NextResponse.next();
 }
