@@ -1,7 +1,6 @@
 'use client'
 
 import ScalePreview from "@/components/ScalePreview"
-import NavBar from "@/components/NavBar"
 
 const majorScales = [
   "Ionian",
@@ -16,7 +15,6 @@ const majorScales = [
 export default function ScaleSelectorPage() {
   return (
     <div className = "p8 sm:p-20">
-      <NavBar />
       <h1 className="text-3xl font-bold text-center mt-20">
         Select a Scale to Practice
       </h1>

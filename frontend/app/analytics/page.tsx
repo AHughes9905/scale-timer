@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useState } from 'react';
-import NavBar from '@/components/NavBar';
 import TimeLog from '@/types/time_log';
 import PlotFromLogList from '@/components/PlotFromLogList';
 
@@ -26,8 +25,7 @@ export default function AnalyticsPage() {
   }, []);
 
   return (
-    <div className='p-4 sm:p-10'>
-      <NavBar />
+    <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
       <h1 className='text-3xl font-bold mt-20'>
         Analytics
       </h1>
