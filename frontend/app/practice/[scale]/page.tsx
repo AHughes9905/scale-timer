@@ -5,16 +5,6 @@ import { useParams } from "next/navigation"
 import Image from 'next/image';
 import TimeLog from "@/types/time_log"
 
-const scales = [
-    "Ionian",
-    "Dorian",
-    "Phrygian",
-    "Lydian",
-    "Mixolydian",
-    "Aeolian",
-    "Locrian",
-]
-
 const notes = [
     "C",
     "C#/Db",
@@ -29,6 +19,11 @@ const notes = [
     "A#/Bb",
     "B",
 ]
+
+function formatHelper(scale: string) {
+  let words = scale.replace(/_/g, ' ').split(' ');
+  return words.map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+}
 
 export default function PracticePage() {
   const [time, setTime] = useState(0)
@@ -158,8 +153,8 @@ export default function PracticePage() {
     <div className = "p8 sm:p-10">
     <div className="flex flex-row items-center justify-center p-8 bg-gray-100">
       <div className="flex flex-col items-center">
-        <span className="text-5xl font-mono">
-          {(scale as string).charAt(0).toUpperCase() + (scale as string).slice(1)}
+        <span className="text-5xl">
+          {formatHelper(scale)}
         </span>
         <Image
           src={`/images/${scale}.png`}
