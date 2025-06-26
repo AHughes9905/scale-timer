@@ -158,7 +158,7 @@ export default function PracticePage() {
     <div className = "p8 sm:p-10">
     <div className="flex flex-row items-center justify-center p-8 bg-gray-100">
       <div className="flex flex-col items-center">
-        <span className="text-8xl font-mono">
+        <span className="text-5xl font-mono">
           {(scale as string).charAt(0).toUpperCase() + (scale as string).slice(1)}
         </span>
         <Image
