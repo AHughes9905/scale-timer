@@ -5,3 +5,5 @@ pydantic_settings==2.10.1
 python-dotenv==1.1.1
 python_jose==3.5.0
 SQLAlchemy==2.0.41
+uvicorn[standard]==0.30.1
+asyncpg==0.28.0
