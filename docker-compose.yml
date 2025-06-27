@@ -2,14 +2,14 @@ services:
   frontend:
     build: ./frontend
     ports:
-      - "80:80"   # Local:Container
+      - "3000:3000"   # Local:Container
     depends_on:
       - backend
 
   backend:
     build: ./backend
     ports:
-      - "8080:8080"
+      - "8000:8000"
     depends_on:
       db:
         condition: service_healthy

@@ -10,6 +10,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 EXPOSE 8000
 
-RUN python -m db.init_db
+#RUN python -m db.init_db
 
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
