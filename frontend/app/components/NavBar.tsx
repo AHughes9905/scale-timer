@@ -15,7 +15,7 @@ export default function NavBar() {
           className="hover:underline text-red-600"
           onClick={() => {
             // Clear the cookie to log out
-            fetch("http://localhost:8000/api/auth/logout", {
+            fetch("/api/auth/logout", {
               method: "POST",
               credentials: "include",
               headers: {

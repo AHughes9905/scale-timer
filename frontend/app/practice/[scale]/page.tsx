@@ -118,7 +118,7 @@ export default function PracticePage() {
   const handleSave = () => {
 
     const timeString = formatTime(time)
-    fetch("http://localhost:8000/api/time/create/", {
+    fetch("/api/time/create/", {
       method: "POST",
       credentials: "include",
       headers: {

@@ -8,7 +8,7 @@ export default function AnalyticsPage() {
   const [logs, setLogs] = useState<TimeLog[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/time/", {
+    fetch("/api/time/", {
       method: "GET",
       credentials: "include",
     })

@@ -24,7 +24,7 @@ export default function Register() {
     formData.append("username", username);
     formData.append("password", password);
 
-    fetch("http://localhost:8000/api/auth/register", {
+    fetch("/api/auth/register", {
       method: "POST",
       credentials: "include",
       body: formData,
