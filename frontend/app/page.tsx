@@ -4,8 +4,8 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center p-0 font-[var(--font-geist-sans)] bg-gray-50">
-      <main className="flex-1 flex flex-col items-center justify-center w-full px-2 py-4 sm:px-8 sm:py-10">
+    <div className="h-screen flex flex-col justify-center items-center p-0 font-[var(--font-geist-sans)] bg-white overflow-hidden">
+      <main className="flex-1 flex flex-col items-center justify-center w-full px-2 py-4 sm:px-8 sm:py-10 overflow-hidden">
         <div className="w-full max-w-5xl flex flex-col items-center justify-center gap-12">
           <section className="flex flex-col justify-center items-center gap-8 bg-white rounded-2xl shadow-xl p-12 w-full min-h-[420px] max-w-2xl">
             <h1 className="text-5xl font-extrabold mb-2 text-gray-800">Dashboard</h1>
