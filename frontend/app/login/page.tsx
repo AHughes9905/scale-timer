@@ -50,12 +50,12 @@ export default function Login() {
         if (res.ok) {
           window.location.href = "/";
         } else {
-          showBanner("error", "Login failed. Please check your credentials.");
+          alert("Login failed. Please check your credentials.");
         }
       })
       .catch(err => {
         console.error("Login error:", err);
-        showBanner("error", "An error occurred while logging in.");
+        alert("An error occurred while logging in.");
       });
   };
 
