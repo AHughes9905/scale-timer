@@ -32,7 +32,7 @@ services:
     expose:
       - "5432"
     volumes:
-      - scaledata:/var/lib/postgresql/data
+      - scaletimerdata:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U aaron -d scaledb"]
       interval: 5s
@@ -40,4 +40,4 @@ services:
       retries: 5
 
 volumes:
-  scaledata:
+  scaletimerdata:

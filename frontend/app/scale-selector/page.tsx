@@ -22,8 +22,8 @@ const pentatonicScales = [
 
 export default function ScaleSelectorPage() {
   return (
-    <div className = "p8 sm:p-20">
-      <h1 className="text-3xl font-bold text-center mt-20">
+    <div className="px-4 py-6 sm:px-10 sm:py-10">
+      <h1 className="text-3xl font-bold text-center mt-4">
         Select a Scale to Practice
       </h1>
       <div className="text-left mt-4">
