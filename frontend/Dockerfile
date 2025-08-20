@@ -5,5 +5,5 @@ RUN npm install --production
 RUN npm install --save-dev @tailwindcss/postcss
 RUN npm run build
 
-EXPOSE 3000
+EXPOSE 4000
 CMD ["npm", "start"]
