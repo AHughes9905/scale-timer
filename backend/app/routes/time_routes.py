@@ -24,6 +24,7 @@ async def get_user_times_by_scale(
         return {"message": "No timing logs found for this user and scale."}
     
 @router.get("/")
+@router.get("")
 async def get_user_times(
     db: AsyncSession = Depends(get_db),
     current_user: User = Depends(dependencies.get_current_user)

@@ -18,7 +18,7 @@ services:
     expose:
       - "8080"
     depends_on:
-      db:
+      scaletimer-db:
         condition: service_healthy
 
   scaletimer-db:
