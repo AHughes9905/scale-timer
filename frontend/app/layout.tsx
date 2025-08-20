@@ -1,3 +1,8 @@
+export const metadata = {
+  icons: {
+    icon: '/favicon.ico',
+  },
+};
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import NavBarWrapper from "@/components/NavBarWrapper";
