@@ -1,5 +1,6 @@
 services:
   frontend:
+    container_name: scaletimer-frontend
     build: ./frontend
     expose:
       - "4000"
@@ -7,6 +8,7 @@ services:
       - backend
 
   backend:
+    container_name: scaletimer-backend
     build: ./backend
     expose:
       - "8080"
@@ -15,6 +17,7 @@ services:
         condition: service_healthy
 
   db:
+    container_name: scaletimer-db
     image: postgres:17
     restart: always
     environment:
