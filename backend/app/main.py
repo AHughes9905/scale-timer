@@ -13,6 +13,7 @@ app.include_router(time_routes.router, prefix="/api/time", tags=["time"])
 origins = [
     "http://localhost:3000",
     "http://frontend:3000",
+    "https://scaletimer.aaronhughes.dev",
 ]
 
 app.add_middleware(
