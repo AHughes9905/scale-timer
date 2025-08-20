@@ -1,3 +1,8 @@
+networks:
+  default:
+    name: portfolio_net
+    external: true
+
 services:
   frontend:
     container_name: scaletimer-frontend
